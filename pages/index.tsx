@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useMemo, useState, useEffect, useRef } from 'react'
 import styles from '../styles/Home.module.css'
+import Footer from '../components/Footer'
 import { Mesh, Vector3, Spherical } from 'three';
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, OrbitControls, Cloud, PerspectiveCamera, Sparkles, TrackballControls, Text } from '@react-three/drei';
@@ -87,16 +88,9 @@ const Home: NextPage = () => {
 
   const { email, subject, body } = contact;
 
-  const [errors, setErrors] = useState({
-    email: {
-      error: false,
-      message: ""
-    },
-    body: {
-      error: false,
-      message: ""
-    }
-  })
+  const [bodyError, setBodyError] = useState({ error: false, message: "" })
+  const [emailError, setEmailError] = useState({ error: false, message: "" })
+  const [loading, setLoading] = useState(false);
 
   const spherical = new Spherical()
   const temp: any[] = [];
@@ -204,21 +198,23 @@ const Home: NextPage = () => {
   const onSubmit = async (e: any) => {
     e.preventDefault();
     let willReturn = false;
-    if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(contact.email)) {
-      setErrors({ ...errors, email: { error: true, message: "Invalid email input." } })
+    if (contact.body == "") {
+      setBodyError({ error: true, message: "Empty body." })
       willReturn = true;
     } else {
-      setErrors({ ...errors, email: { error: false, message: "" } })
+      setBodyError({ error: false, message: "" })
     }
 
-    if (contact.body == "") {
-      setErrors({ ...errors, body: { error: true, message: "Body is empty." } });
+    if (contact.email == '') {
+      setEmailError({ error: true, message: "Empty email." })
       willReturn = true;
     } else {
-      setErrors({ ...errors, body: { error: false, message: "" } });
+      setEmailError({ error: false, message: "" });
     }
 
     if (willReturn) return
+
+    setLoading(true);
 
     try {
       await fetch("https://pfolio-backend.herokuapp.com/send-email", {
@@ -235,14 +231,17 @@ const Home: NextPage = () => {
       });
     } catch (err) {
       console.log(err)
+      window.alert("Error while sending message. Please try again later.")
     }
     setContact({ email: "", subject: "", body: "" });
+
+    setLoading(false);
 
     window.alert("Message Sent.");
   }
 
   return (
-    <div>
+    <div style={{ fontFamily: "open sans" }}>
       <Head>
         <title>Prince Addo</title>
         <meta name="description" content="Prince Addo's Portfolio Website" />
@@ -357,224 +356,231 @@ const Home: NextPage = () => {
                   alt="linkedin logo"
                 />
               </a>
-              <a target="_blank" rel="noopener noreferrer" href="https://www.goodreads.com/user/show/35651372-prince">
+              {/* <a target="_blank" rel="noopener noreferrer" href="https://www.goodreads.com/user/show/35651372-prince">
                 <Image
                   src="/images/goodreads.png"
                   height={40}
                   width={40}
                   alt="goodreads logo"
                 />
-              </a>
+              </a> */}
             </div>
             <Link href="/files/prince-addo-resume.pdf">
               <a><h2>Resume 📝</h2></a>
             </Link>
           </div>
         </div>
-        <div id="home">
-          <div>
-            <h1>Hi!👋</h1>
-            <h2>I am Prince,</h2>
-            <h3>College Student/Software Engineer</h3>
+        <div className={styles.pageContent}>
+          <div id="home" className={styles.homeC}>
+            <div className={styles.homeHead}>
+              <h1>Hi! 👋</h1>
+              <h2>I am Prince,</h2>
+              <h3>College Student/Software Engineer</h3>
+            </div>
+            <div className={styles.canvas}>
+              <Canvas>
+                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+                <Cloud position={[0, 15, 0]} speed={1} opacity={0.7} />
+                <ambientLight intensity={0.5} />
+                <PerspectiveCamera makeDefault position={new Vector3(15, 10, 25)} />
+                <UseGLTFScene />
+              </Canvas>
+            </div>
           </div>
-          <div className={styles.canvas}>
-            <Canvas>
-              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-              <Cloud position={[0, 15, 0]} speed={1} opacity={0.7} />
-              <ambientLight intensity={0.5} />
-              <PerspectiveCamera makeDefault position={new Vector3(15, 10, 25)} />
-              <UseGLTFScene />
-            </Canvas>
+          <div id="sandi" className={styles.sandiC}>
+            <div className={styles.sandiHead}>
+              <h1>Skills & Interest</h1>
+              <p>
+                My expertise is full stack web development with a frontend frameworks like<br />
+                React, Next.JS, Svelte and backend frameworks like Express, Fastify, Nest.JS,<br />
+                Spring Boot.<br />
+                The languages that I&apos;m proficient in are C++, Java, Python, Javascript, Typescript,<br />
+                Kotlin, and Rust.<br />
+                I&apos;m interested in full stack development, compiler design, operating systems,<br />
+                and application layer network protocols.
+              </p>
+            </div>
+            <div className={styles.canvas}>
+              <Canvas>
+                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+                <ambientLight intensity={0.5} />
+                <React.Suspense>
+                  <Typescript position={temp[0]} />
+                  <Javascript position={temp[1]} />
+                  <Java position={temp[2]} />
+                  <Spring position={temp[3]} />
+                  <Python position={temp[4]} />
+                  <CPlusPlus position={temp[5]} />
+                  <Kotlin position={temp[6]} />
+                  <Rust position={temp[7]} />
+                  <ReactF position={temp[8]} />
+                  <Svelte position={temp[9]} />
+                  <Fastify position={temp[10]} />
+                </React.Suspense>
+                <OrbitControls enableDamping={true} rotateSpeed={1} autoRotateSpeed={3} autoRotate />
+              </Canvas>
+            </div>
           </div>
-        </div>
-        <div id="sandi">
-          <h1>Skills & Interest</h1>
-          <div>
-            <p>
-              My expertise is full stack web development with a frontend frameworks like<br />
-              React, Next.JS, Svelte and backend frameworks like Express, Fastify, Nest.JS,<br />
-              Spring Boot.<br />
-              The languages that I&apos;m proficient in are C++, Java, Python, Javascript, Typescript,<br />
-              Kotlin, and Rust.<br />
-              I&apos;m interested in full stack development, compiler design, operating systems,<br />
-              and application layer network protocols.
-            </p>
+          <div id="project" className={styles.projectC}>
+            <h1>Projects</h1>
+            <div>
+              <Container fluid>
+                <Row>
+                  <Col>
+                    <motion.div
+                      initial={{ opacity: 1 }}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+                      onMouseOver={() => setImgHover({ img2: false, img3: false, img4: false, img1: true })}
+                      onMouseOut={() => setImgHover({ ...imgHover, img1: false })}
+                      style={{ backgroundColor: "#3D0C02 ", display: 'flex', alignItems: 'center', justifyContent: 'center', height: 400 }}
+                      className={styles.projectCont}
+                      onClick={() => setRVis({ ...rVis, img1: true })}
+                    >
+                      <Image
+                        src="https://raw.githubusercontent.com/prince-ao/AnimeLazerV3/main/assets/Logo2.png"
+                        width={200}
+                        height={200}
+                        alt="animelazer logo"
+                      />
+                      {imgHover.img1
+                        ?
+                        <motion.div
+                          transition={{ duration: 0.3 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          style={{ position: 'absolute', backgroundColor: '#002E63', color: 'white', borderRadius: 100, width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}
+                        >
+                          <p>
+                            click to view
+                          </p>
+                        </motion.div>
+                        :
+                        <></>}
+                    </motion.div>
+                  </Col>
+                  <Col>
+                    <motion.div
+                      initial={{ opacity: 1 }}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+                      onMouseOver={() => setImgHover({ img1: false, img3: false, img4: false, img2: true })}
+                      onMouseOut={() => setImgHover({ ...imgHover, img2: false })}
+                      style={{ backgroundColor: "#3D0C02", display: 'flex', alignItems: 'center', justifyContent: 'center', height: 400 }}
+                      className={styles.projectCont}
+                      onClick={() => setRVis({ ...rVis, img2: true })}
+                    >
+                      <Image
+                        src="https://consumet.org/images/consumetlogo.png"
+                        width={200}
+                        height={200}
+                        alt="consumet api logo"
+                      />
+                      {imgHover.img2
+                        ?
+                        <motion.div
+                          transition={{ duration: 0.3 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          style={{ position: 'absolute', backgroundColor: '#002E63', color: 'white', borderRadius: 100, width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}
+                        >
+                          <p>
+                            click to view
+                          </p>
+                        </motion.div>
+                        :
+                        <></>}
+                    </motion.div>
+                  </Col>
+                  <Col>
+                    <motion.div
+                      initial={{ opacity: 1 }}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+                      onMouseOver={() => setImgHover({ img1: false, img2: false, img4: false, img3: true })}
+                      onMouseOut={() => setImgHover({ ...imgHover, img3: false })}
+                      style={{ backgroundColor: "#3D0C02", display: 'flex', alignItems: 'center', justifyContent: 'center', height: 400 }}
+                      className={styles.projectCont}
+                      onClick={() => setRVis({ ...rVis, img3: true })}
+                    >
+                      <Image
+                        src="https://raw.githubusercontent.com/prince-ao/samizdat/main/assets/images/samizdat_logo.png"
+                        width={200}
+                        height={200}
+                        alt="samizdat logo"
+                      />
+                      {imgHover.img3
+                        ?
+                        <motion.div
+                          transition={{ duration: 0.3 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          style={{ position: 'absolute', backgroundColor: '#002E63', color: 'white', borderRadius: 100, width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}
+                        >
+                          <p>
+                            click to view
+                          </p>
+                        </motion.div>
+                        :
+                        <></>}
+                    </motion.div>
+                  </Col>
+                  <Col>
+                    <motion.div
+                      initial={{ opacity: 1 }}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+                      onMouseOver={() => setImgHover({ img1: false, img2: false, img3: false, img4: true })}
+                      onMouseOut={() => setImgHover({ ...imgHover, img4: false })}
+                      style={{ backgroundColor: "#3D0C02", display: 'flex', alignItems: 'center', justifyContent: 'center', height: 400 }}
+                      className={styles.projectCont}
+                      onClick={() => setRVis({ ...rVis, img4: true })}
+                    >
+                      <Image
+                        src="https://raw.githubusercontent.com/prince-ao/YASC/main/assets/calc.png"
+                        width={200}
+                        height={200}
+                        alt="YASC logo"
+                      />
+                      {imgHover.img4
+                        ?
+                        <motion.div
+                          transition={{ duration: 0.3 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          style={{ position: 'absolute', backgroundColor: '#002E63', color: 'white', borderRadius: 100, width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}
+                        >
+                          <p>
+                            click to view
+                          </p>
+                        </motion.div>
+                        :
+                        <></>}
+                    </motion.div>
+                  </Col>
+                </Row>
+              </Container>
+            </div>
           </div>
-          <div className={styles.canvas}>
-            <Canvas>
-              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-              <ambientLight intensity={0.5} />
-              <React.Suspense>
-                <Typescript position={temp[0]} />
-                <Javascript position={temp[1]} />
-                <Java position={temp[2]} />
-                <Spring position={temp[3]} />
-                <Python position={temp[4]} />
-                <CPlusPlus position={temp[5]} />
-                <Kotlin position={temp[6]} />
-                <Rust position={temp[7]} />
-                <ReactF position={temp[8]} />
-                <Svelte position={temp[9]} />
-                <Fastify position={temp[10]} />
-              </React.Suspense>
-              <OrbitControls enableDamping={true} rotateSpeed={1} autoRotateSpeed={3} autoRotate />
-            </Canvas>
-          </div>
-        </div>
-        <div id="project">
-          <h1>Projects</h1>
-          <div>
-            <Container fluid>
-              <Row>
-                <Col>
-                  <motion.div
-                    initial={{ opacity: 1 }}
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-                    onMouseOver={() => setImgHover({ ...imgHover, img1: true })}
-                    onMouseOut={() => setImgHover({ ...imgHover, img1: false })}
-                    style={{ backgroundColor: "gray", display: 'flex', alignItems: 'center', justifyContent: 'center', height: 400 }}
-                    className={styles.projectCont}
-                    onClick={() => setRVis({ ...rVis, img1: true })}
-                  >
-                    <Image
-                      src="https://raw.githubusercontent.com/prince-ao/AnimeLazerV3/main/assets/Logo2.png"
-                      width={200}
-                      height={200}
-                      alt="animelazer logo"
-                    />
-                    {imgHover.img1
-                      ?
-                      <motion.div
-                        transition={{ duration: 0.3 }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        style={{ position: 'absolute', backgroundColor: 'blue', borderRadius: 100, width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}
-                      >
-                        <p>
-                          click to view
-                        </p>
-                      </motion.div>
-                      :
-                      <></>}
-                  </motion.div>
-                </Col>
-                <Col>
-                  <motion.div
-                    initial={{ opacity: 1 }}
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-                    onMouseOver={() => setImgHover({ ...imgHover, img2: true })}
-                    onMouseOut={() => setImgHover({ ...imgHover, img2: false })}
-                    style={{ backgroundColor: "gray", display: 'flex', alignItems: 'center', justifyContent: 'center', height: 400 }}
-                    className={styles.projectCont}
-                    onClick={() => setRVis({ ...rVis, img2: true })}
-                  >
-                    <Image
-                      src="https://consumet.org/images/consumetlogo.png"
-                      width={200}
-                      height={200}
-                      alt="consumet api logo"
-                    />
-                    {imgHover.img2
-                      ?
-                      <motion.div
-                        transition={{ duration: 0.3 }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        style={{ position: 'absolute', backgroundColor: 'blue', borderRadius: 100, width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}
-                      >
-                        <p>
-                          click to view
-                        </p>
-                      </motion.div>
-                      :
-                      <></>}
-                  </motion.div>
-                </Col>
-                <Col>
-                  <motion.div
-                    initial={{ opacity: 1 }}
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-                    onMouseOver={() => setImgHover({ ...imgHover, img3: true })}
-                    onMouseOut={() => setImgHover({ ...imgHover, img3: false })}
-                    style={{ backgroundColor: "gray", display: 'flex', alignItems: 'center', justifyContent: 'center', height: 400 }}
-                    className={styles.projectCont}
-                    onClick={() => setRVis({ ...rVis, img3: true })}
-                  >
-                    <Image
-                      src="https://raw.githubusercontent.com/prince-ao/samizdat/main/assets/images/samizdat_logo.png"
-                      width={200}
-                      height={200}
-                      alt="samizdat logo"
-                    />
-                    {imgHover.img3
-                      ?
-                      <motion.div
-                        transition={{ duration: 0.3 }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        style={{ position: 'absolute', backgroundColor: 'blue', borderRadius: 100, width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}
-                      >
-                        <p>
-                          click to view
-                        </p>
-                      </motion.div>
-                      :
-                      <></>}
-                  </motion.div>
-                </Col>
-                <Col>
-                  <motion.div
-                    initial={{ opacity: 1 }}
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-                    onMouseOver={() => setImgHover({ ...imgHover, img4: true })}
-                    onMouseOut={() => setImgHover({ ...imgHover, img4: false })}
-                    style={{ backgroundColor: "gray", display: 'flex', alignItems: 'center', justifyContent: 'center', height: 400 }}
-                    className={styles.projectCont}
-                    onClick={() => setRVis({ ...rVis, img4: true })}
-                  >
-                    <Image
-                      src="https://raw.githubusercontent.com/prince-ao/YASC/main/assets/calc.png"
-                      width={200}
-                      height={200}
-                      alt="YASC logo"
-                    />
-                    {imgHover.img4
-                      ?
-                      <motion.div
-                        transition={{ duration: 0.3 }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        style={{ position: 'absolute', backgroundColor: 'blue', borderRadius: 100, width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}
-                      >
-                        <p>
-                          click to view
-                        </p>
-                      </motion.div>
-                      :
-                      <></>}
-                  </motion.div>
-                </Col>
-              </Row>
-            </Container>
-          </div>
-        </div>
-        <div id="contact">
-          <h1>Contact Me</h1>
-          <div>
+          <div id="contact" className={styles.contactC}>
+            <h1>Contact Me</h1>
             <form onSubmit={onSubmit}>
-              <input value={contact.email} type="email" onChange={(e) => setContact({ ...contact, email: e.target.value })} />
-              {errors.email.error && <p>{errors.email.message}</p>}
-              <input value={contact.subject} onChange={(e) => setContact({ ...contact, subject: e.target.value })} />
-              <textarea value={contact.body} onChange={(e) => setContact({ ...contact, body: e.target.value })} />
-              {errors.body.error && <p>{errors.body.message}</p>}
-              <input type="submit" />
+              <input placeholder="Email" value={contact.email} type="email" onChange={(e) => setContact({ ...contact, email: e.target.value })} className={styles.email} />
+              {emailError.error && <p style={{ fontWeight: 'bold', color: "red" }}>{emailError.message}</p>}
+              <input placeholder="Subject" value={contact.subject} onChange={(e) => setContact({ ...contact, subject: e.target.value })} className={styles.subject} />
+              <textarea placeholder="Message" value={contact.body} onChange={(e) => setContact({ ...contact, body: e.target.value })} className={styles.message} rows={6} />
+              {bodyError.error && <p style={{ fontWeight: 'bold', color: "red" }}>{bodyError.message}</p>}
+              <input type="submit" className={styles.submit} value="Submit" />
+              {loading
+                ?
+                <div style={{ width: "200px", height: "200px" }}>
+                  <Image height={200} width={200} className={styles.loading} src="/images/loading.gif" alt="green loading" />
+                </div>
+                : <></>}
             </form>
           </div>
         </div>
+        <Footer />
       </main>
     </div>
   )

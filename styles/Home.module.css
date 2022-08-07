@@ -1,6 +1,8 @@
 .canvas {
-	width: 200px;
-	height: 200px;
+	width: 500px;
+	height: 500px;
+	align-self: center;
+	margin-right: 200px;
 }
 
 .projectCont:hover {
@@ -11,6 +13,10 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	background-color: #3b3c36;
+	color: white;
+	margin-bottom: 0;
+	padding-bottom: 0;
 }
 
 .headerNav {
@@ -36,5 +42,145 @@
 	width: 50%;
 	display: flex;
 	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.pageContent {
+	padding-top: 0;
+	margin-top: 0;
+	background-color: #0e0e10;
+	color: #20c20e;
+}
+
+.homeC {
+	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
+	height: 100vh;
+}
+
+.homeHead {
+	margin-top: 90px;
+	margin-left: 100px;
+}
+
+.homeHead h1 {
+	font-size: 100px;
+}
+
+.homeHead h2 {
+	font-size: 50px;
+}
+
+.homeHead h3 {
+	font-size: 25px;
+}
+
+.sandiC {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 100vh;
+}
+
+.sandiHead {
+	margin-left: 100px;
+	margin-top: 80px;
+}
+
+.sandiHead h1 {
+	font-size: 50px;
+}
+
+.sandiHead p {
+	font-size: 20px;
+	line-height: 40px;
+}
+
+.projectC {
+	height: 100vh;
+}
+
+.projectC h1 {
+	font-size: 50px;
+	margin-left: 100px;
+}
+
+.contactC {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	margin-left: 100px;
+}
+
+.contactC h1 {
+	font-size: 50px;
+}
+
+.contactC form {
+	display: flex;
+	flex-direction: column;
+	margin-top: 100px;
+}
+
+.email {
+	width: 250px;
+	height: 40px;
+	font-size: 15px;
+	background-color: #007791;
+	color: white;
+	border: 3px solid #000080;
+	border-radius: 10px;
+}
+
+.email:focus {
+	outline: none;
+}
+
+.subject {
+	width: 500px;
+	height: 40px;
+	font-size: 15px;
+	margin-top: 30px;
+	background-color: #007791;
+	color: white;
+	border: 3px solid #000080;
+	border-radius: 10px;
+}
+
+.subject:focus {
+	outline: none;
+}
+
+.message {
+	margin-top: 30px;
+	width: 750px;
+	font-size: 15px;
+	background-color: #007791;
+	color: white;
+	border: 3px solid #000080;
+	border-radius: 10px;
+}
+
+.message:focus {
+	outline: none;
+}
+
+.submit {
+	margin-top: 30px;
+	width: 200px;
+	height: 45px;
+	background-color: #000080;
+	color: white;
+	border: 3px solid #007791;
+	border-radius: 10px;
+}
+
+.submit:hover {
+	cursor: pointer;
+	background-color: #191970;
+}
+
+.loading {
+	width: 10px;
 }
