@@ -15,6 +15,7 @@ import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 import Gallery from 'react-grid-gallery';
 import axios from 'axios'
+import LightSwitch from '../components/LightSwitch'
 
 function Plant() {
   const plant = useGLTF('/3D-Objects/plant.glb', '/draco-gltf/')
@@ -91,6 +92,8 @@ const Home: NextPage = () => {
   const [bodyError, setBodyError] = useState({ error: false, message: "" })
   const [emailError, setEmailError] = useState({ error: false, message: "" })
   const [loading, setLoading] = useState(false);
+
+  const [isOn, setIsOn] = useState(true)
 
   const spherical = new Spherical()
   const temp: any[] = [];
@@ -368,9 +371,11 @@ const Home: NextPage = () => {
             <Link href="/files/prince-addo-resume.pdf">
               <a><h2>Resume 📝</h2></a>
             </Link>
+            <LightSwitch isOn={isOn} setIsOn={setIsOn} />
           </div>
         </div>
-        <div className={styles.pageContent}>
+
+        <div className={styles.pageContent} style={{ backgroundColor: isOn ? "#0e0e10" : "white", color: isOn ? "#20c20e" : "black" }}>
           <div id="home" className={styles.homeC}>
             <div className={styles.homeHead}>
               <h1>Hi! 👋</h1>
