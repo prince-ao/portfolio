@@ -304,7 +304,7 @@ const Home: NextPage = () => {
         <Rodal width={400} height={600} animation="rotate" visible={rVis.img4} onClose={() => setRVis({ ...rVis, img4: false })}>
           <div style={{ display: "flex", flexDirection: 'row' }}>
             <h1>YASC</h1>
-            <a href="https://github.com/consumet/consumet-api" target="_blank" rel="noopener noreferrer" style={{ marginLeft: 20, marginTop: 15 }}>
+            <a href="https://github.com/prince-ao/YASC" target="_blank" rel="noopener noreferrer" style={{ marginLeft: 20, marginTop: 15 }}>
               <Image
                 src="/images/github.png"
                 height={50}
