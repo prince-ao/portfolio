@@ -396,7 +396,7 @@ const Home: NextPage = () => {
             <div className={styles.sandiHead}>
               <h1>Skills & Interest</h1>
               <p>
-                My expertise is full stack web development with a frontend frameworks like<br />
+                My expertise is full stack web development with frontend frameworks like<br />
                 React, Next.JS, Svelte and backend frameworks like Express, Fastify, Nest.JS,<br />
                 Spring Boot.<br />
                 The languages that I&apos;m proficient in are C++, Java, Python, Javascript, Typescript,<br />
