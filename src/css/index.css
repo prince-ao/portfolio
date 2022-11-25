@@ -1,0 +1,93 @@
+html {
+	/* background-color: black; */
+	color: green;
+	font-family: 'Fira Code', Calibri, Tahoma, sans-serif;
+}
+
+*::selection {
+	background-color: rgba(255, 255, 255, 0.712);
+	color: black;
+}
+
+*::-moz-selection {
+	background-color: rgba(255, 255, 255, 0.712);
+	color: black;
+}
+
+nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	border-bottom: 1px dashed rgb(56, 56, 56);
+}
+
+nav h1 {
+	background-color: white;
+}
+
+nav h1 a {
+	text-decoration: none;
+	color: green;
+}
+
+nav h1 a:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+nav h1 a:visited {
+	color: green;
+}
+
+nav ul {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	background-color: white;
+	width: 20px;
+}
+
+.link_container {
+	margin-top: 30px;
+	width: 50vh;
+	font-size: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.title {
+	font-size: xx-large;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 82vh;
+}
+
+.content_text {
+	font-size: 40px;
+	width: 50vw;
+}
+
+.letterh {
+	width: 90px;
+}
+
+a {
+	color: rgb(113, 5, 185);
+	text-decoration: none;
+}
+
+@font-face {
+	font-family: 'Fira Code';
+	src: url('../assets/fonts/FiraCode-Regular.ttf');
+	src: url('../assets/fonts/FiraCode-Medium.otf') format('opentype'),
+		url('../assets/fonts/FiraCode-Regular.ttf') format('truetype'),
+		url('../assets/fonts/FiraCode-Regular.woff') format('woff'),
+		url('../assets/fonts/FiraCode-Regular.woff2') format('woff2');
+}
