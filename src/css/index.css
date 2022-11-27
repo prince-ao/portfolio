@@ -85,9 +85,9 @@ a {
 
 @font-face {
 	font-family: 'Fira Code';
-	src: url('../assets/fonts/FiraCode-Regular.ttf');
-	src: url('../assets/fonts/FiraCode-Medium.otf') format('opentype'),
-		url('../assets/fonts/FiraCode-Regular.ttf') format('truetype'),
-		url('../assets/fonts/FiraCode-Regular.woff') format('woff'),
-		url('../assets/fonts/FiraCode-Regular.woff2') format('woff2');
+	src: url('/fonts/FiraCode-Regular.ttf');
+	src: url('/fonts/FiraCode-Medium.otf') format('opentype'),
+		url('/fonts/FiraCode-Regular.ttf') format('truetype'),
+		url('/fonts/FiraCode-Regular.woff') format('woff'),
+		url('/fonts/FiraCode-Regular.woff2') format('woff2');
 }

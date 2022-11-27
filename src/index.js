@@ -1,5 +1,12 @@
-const fastify = require('fastify')({ logger: true });
-const fs = require('fs');
+import Fastify from 'fastify';
+import fs from 'fs';
+import css from './routes/css-routes.js';
+import images from './routes/images-routes.js';
+import fonts from './routes/fonts-routes.js';
+import documents from './routes/documents-routes.js';
+import javascript from './routes/js-routes.js';
+
+const fastify = Fastify({ logger: true });
 
 fastify.get('/', async (request, reply) => {
 	try {
@@ -41,75 +48,11 @@ fastify.get('/contact', async (request, reply) => {
 	}
 });
 
-fastify.get('/css/index.css', async (request, reply) => {
-	try {
-		const file = fs.readFileSync('./src/css/index.css');
-		reply.type('text/css').send(file);
-	} catch (err) {
-		const error = new Error('Internal Error.');
-		reply.code(501).send(error);
-	}
-});
-
-fastify.get('/images/capital_h.gif', async (request, reply) => {
-	try {
-		const file = fs.readFileSync('./src/assets/images/capital_h.gif');
-		reply.type('text/html').send(file);
-	} catch (err) {
-		const error = new Error('Internal Error.');
-		reply.code(501).send(error);
-	}
-});
-
-fastify.get('/assets/fonts/FiraCode-Medium.otf', async (request, reply) => {
-	try {
-		const file = fs.readFileSync('./src/assets/fonts/FiraCode-Medium.otf');
-		reply.type('text/otf').send(file);
-	} catch (err) {
-		const error = new Error('Internal Error.');
-		reply.code(501).send(error);
-	}
-});
-
-fastify.get('/assets/fonts/FiraCode-Regular.ttf', async (request, reply) => {
-	try {
-		const file = fs.readFileSync('./src/assets/fonts/FiraCode-Regular.ttf');
-		reply.type('text/tff').send(file);
-	} catch (err) {
-		const error = new Error('Internal Error.');
-		reply.code(501).send(error);
-	}
-});
-
-fastify.get('/assets/fonts/FiraCode-Regular.woff', async (request, reply) => {
-	try {
-		const file = fs.readFileSync('./src/assets/fonts/FiraCode-Regular.woff');
-		reply.type('text/woff').send(file);
-	} catch (err) {
-		const error = new Error('Internal Error.');
-		reply.code(501).send(error);
-	}
-});
-
-fastify.get('/assets/fonts/FiraCode-Regular.woff2', async (request, reply) => {
-	try {
-		const file = fs.readFileSync('./src/assets/fonts/FiraCode-Regular.woff2');
-		reply.type('text/otf').send(file);
-	} catch (err) {
-		const error = new Error('Internal Error.');
-		reply.code(501).send(error);
-	}
-});
-
-fastify.get('/assets/documents/prince_addo_resume.pdf', async (request, reply) => {
-	try {
-		const file = fs.readFileSync('./src/assets/documents/prince_addo_resume.pdf');
-		reply.type('text/otf').send(file);
-	} catch (err) {
-		const error = new Error('Internal Error.');
-		reply.code(501).send(error);
-	}
-});
+fastify.register(css, { prefix: '/css' });
+fastify.register(images, { prefix: '/images' });
+fastify.register(fonts, { prefix: '/fonts' });
+fastify.register(documents, { prefix: '/documents' });
+fastify.register(javascript, { prefix: '/javascript' });
 
 (async () => {
 	try {
