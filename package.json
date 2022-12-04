@@ -5,8 +5,8 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"dev": "nodemon src/index.js",
-		"start": "node src/index.js"
+		"dev": "sudo nodemon src/index.js",
+		"start": "sudo node src/index.js"
 	},
 	"repository": {
 		"type": "git",

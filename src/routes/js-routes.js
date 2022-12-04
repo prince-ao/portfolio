@@ -13,7 +13,7 @@ async function routes(fastify, options) {
 
 	fastify.get('/blog.js', async (req, resp) => {
 		try {
-			const file = fs.readFileSync('./src/blog/src/dist/bundle.js');
+			const file = fs.readFileSync('./src/blog/blog-data.js');
 			resp.type('application/javascript').send(file);
 		} catch (err) {
 			const error = new Error('Internal Error.');
