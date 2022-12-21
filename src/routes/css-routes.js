@@ -10,6 +10,16 @@ async function routes(fastify, options) {
 			resp.code(501).send(error);
 		}
 	});
+
+	fastify.get('/projects.css', async (req, resp) => {
+		try {
+			const file = fs.readFileSync('./src/css/projects.css');
+			resp.type('text/css').send(file);
+		} catch (err) {
+			const error = new Error('Internal Error.');
+			resp.code(501).send(error);
+		}
+	});
 }
 
 export default routes;

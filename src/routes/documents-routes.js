@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 async function routes(fastify, options) {
-	fastify.get('/documents/prince_addo_resume.pdf', async (req, resp) => {
+	fastify.get('/prince_addo_resume.pdf', async (req, resp) => {
 		try {
 			const file = fs.readFileSync('./src/assets/documents/prince_addo_resume.pdf');
 			resp.type('application/pdf').send(file);

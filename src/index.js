@@ -5,6 +5,7 @@ import images from './routes/images-routes.js';
 import fonts from './routes/fonts-routes.js';
 import documents from './routes/documents-routes.js';
 import javascript from './routes/js-routes.js';
+import projects from './routes/projects-routes.js';
 
 const fastify = Fastify({ logger: true });
 let visitors = 0;
@@ -47,16 +48,6 @@ fastify.get('/blog', async (request, reply) => {
 	}
 });
 
-fastify.get('/projects', async (request, reply) => {
-	try {
-		const file = fs.readFileSync('./src/pages/projects.html');
-		reply.type('text/html').send(file);
-	} catch (err) {
-		const error = new Error('Internal Error.');
-		reply.code(501).send(error);
-	}
-});
-
 fastify.get('/contact', async (request, reply) => {
 	try {
 		const file = fs.readFileSync('./src/pages/contact.html');
@@ -72,6 +63,7 @@ fastify.register(images, { prefix: '/images' });
 fastify.register(fonts, { prefix: '/fonts' });
 fastify.register(documents, { prefix: '/documents' });
 fastify.register(javascript, { prefix: '/javascript' });
+fastify.register(projects, { prefix: '/projects' });
 
 (async () => {
 	try {

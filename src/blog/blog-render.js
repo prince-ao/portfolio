@@ -1,6 +1,6 @@
 'use strict';
 
-function Card({ title, description, date, blog }) {
+function Card({ title, description, date, blog, updated }) {
 	const [hover, setHover] = React.useState(false);
 	const [viewState, setViewState] = React.useState({
 		type: false,
@@ -8,6 +8,7 @@ function Card({ title, description, date, blog }) {
 		description: '',
 		date: '',
 		blog: '',
+		updated: '',
 	});
 
 	const nhstyle = {
@@ -32,7 +33,7 @@ function Card({ title, description, date, blog }) {
 	};
 
 	function calculateTime(text) {
-		const avgWpm = 300;
+		const avgWpm = 200;
 		let wordCounter = 1;
 		for (let i = 0; i < text.length; i++) {
 			if (text[i] == ' ') wordCounter++;
@@ -62,6 +63,7 @@ function Card({ title, description, date, blog }) {
 						<p>
 							{viewState.date} • {calculateTime(viewState.blog)}
 						</p>
+						<p>Updated: {viewState.updated}</p>
 						<div
 							dangerouslySetInnerHTML={{ __html: viewState.blog }}
 							style={{ fontSize: '20px', width: '70vw' }}></div>
@@ -71,7 +73,7 @@ function Card({ title, description, date, blog }) {
 				<div
 					onMouseEnter={() => setHover(true)}
 					onMouseLeave={() => setHover(false)}
-					onClick={() => setViewState({ type: true, title, description, date, blog })}
+					onClick={() => setViewState({ type: true, title, description, date, blog, updated })}
 					style={hover ? hstyle : nhstyle}>
 					<h1>{title}</h1>
 					<h3>{description}</h3>
@@ -85,8 +87,17 @@ function Card({ title, description, date, blog }) {
 function Blog() {
 	return (
 		<div>
-			{blogs.reverse().map(({ title, description, date, blog }, i) => {
-				return <Card title={title} description={description} date={date} blog={blog} key={i} />;
+			{blogs.reverse().map(({ title, description, date, blog, updated }, i) => {
+				return (
+					<Card
+						title={title}
+						description={description}
+						date={date}
+						blog={blog}
+						updated={updated}
+						key={i}
+					/>
+				);
 			})}
 		</div>
 	);

@@ -1,0 +1,31 @@
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.sub {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 25vw;
+}
+
+[data-darkreader-inline-bgcolor] {
+	background-color: var(--darkreader-inline-bgcolor) !important;
+	width: 0.7em;
+	height: 0.7em;
+	margin-top: 20px;
+}
+
+.language {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.description {
+	width: 50vw;
+	line-height: 45px;
+}

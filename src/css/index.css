@@ -83,6 +83,27 @@ a {
 	text-decoration: none;
 }
 
+.projects-list li img {
+	width: 30px;
+}
+
+.projects-list {
+	list-style: none;
+	font-size: 20px;
+}
+
+.projects-list li {
+	margin-bottom: 50px;
+	margin-top: 30px;
+}
+
+.projects-list li::before {
+	content: '>';
+	display: inline-block;
+	width: 1em;
+	margin-left: -1em;
+}
+
 @font-face {
 	font-family: 'Fira Code';
 	src: url('/fonts/FiraCode-Regular.ttf');
