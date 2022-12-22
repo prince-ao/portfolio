@@ -20,6 +20,26 @@ async function routes(fastify, options) {
 			reply.code(501).send(error);
 		}
 	});
+
+	fastify.get('/consumet', async (request, reply) => {
+		try {
+			const file = fs.readFileSync('./src/pages/projects/consumet.html');
+			reply.type('text/html').send(file);
+		} catch (err) {
+			const error = new Error('Internal Error.');
+			reply.code(501).send(error);
+		}
+	});
+
+	fastify.get('/samizdat', async (request, reply) => {
+		try {
+			const file = fs.readFileSync('./src/pages/projects/samizdat.html');
+			reply.type('text/html').send(file);
+		} catch (err) {
+			const error = new Error('Internal Error.');
+			reply.code(501).send(error);
+		}
+	});
 }
 
 export default routes;
