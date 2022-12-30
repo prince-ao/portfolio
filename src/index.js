@@ -38,7 +38,7 @@ fastify.get('/', async (request, reply) => {
 	}
 });
 
-fastify.get('/blog', async (request, reply) => {
+/*fastify.get('/blog', async (request, reply) => {
 	try {
 		const file = fs.readFileSync('./src/pages/blog.html');
 		reply.type('text/html').send(file);
@@ -46,7 +46,7 @@ fastify.get('/blog', async (request, reply) => {
 		const error = new Error('Internal Error.');
 		reply.code(501).send(error);
 	}
-});
+});*/
 
 fastify.get('/contact', async (request, reply) => {
 	try {
