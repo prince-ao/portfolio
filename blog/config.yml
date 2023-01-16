@@ -72,7 +72,7 @@ params:
   # home-info mode
   homeInfoParams:
     Title: "Informal Grammer"
-    Content: "A series of characters."
+    Content: "A series of words."
 
   socialIcons:
     - name: github
