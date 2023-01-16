@@ -1,4 +1,4 @@
-baseURL: "https://examplesite.com/"
+baseURL: "http://127.0.0.1:3000"
 title: Prince Addo's /blog
 paginate: 5
 theme: PaperMod

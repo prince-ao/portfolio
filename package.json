@@ -3,7 +3,6 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
-	"type": "module",
 	"scripts": {
 		"dev": "sudo nodemon src/index.js",
 		"start": "sudo node src/index.js"
@@ -20,6 +19,7 @@
 	},
 	"homepage": "https://github.com/prince-ao/portfolio#readme",
 	"dependencies": {
+		"@fastify/static": "^6.6.1",
 		"fastify": "^4.10.2",
 		"nodemon": "^2.0.20"
 	}

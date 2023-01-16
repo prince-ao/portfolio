@@ -1,4 +1,4 @@
-import fs from 'fs';
+const fs = require('fs');
 
 async function routes(fastify, options) {
 	fastify.get('/prince_addo_resume.pdf', async (req, resp) => {
@@ -12,4 +12,4 @@ async function routes(fastify, options) {
 	});
 }
 
-export default routes;
+module.exports = routes;

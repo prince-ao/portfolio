@@ -1,4 +1,4 @@
-import fs from 'fs';
+const fs = require('fs');
 
 async function routes(fastify, options) {
 	fastify.get('/blog-render.js', async (req, resp) => {
@@ -22,4 +22,4 @@ async function routes(fastify, options) {
 	});
 }
 
-export default routes;
+module.exports = routes;

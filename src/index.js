@@ -1,13 +1,12 @@
-import Fastify from 'fastify';
-import fs from 'fs';
-import css from './routes/css-routes.js';
-import images from './routes/images-routes.js';
-import fonts from './routes/fonts-routes.js';
-import documents from './routes/documents-routes.js';
-import javascript from './routes/js-routes.js';
-import projects from './routes/projects-routes.js';
+const fastify = require('fastify')({ logger: true });
+const fs = require('fs');
+const css = require('./routes/css-routes.js');
+const images = require('./routes/images-routes.js');
+const fonts = require('./routes/fonts-routes.js');
+const documents = require('./routes/documents-routes.js');
+const javascript = require('./routes/js-routes.js');
+const projects = require('./routes/projects-routes.js');
 
-const fastify = Fastify({ logger: true });
 let visitors = 0;
 let uniqueVisits = 0;
 const ips = [];
@@ -64,6 +63,7 @@ fastify.register(fonts, { prefix: '/fonts' });
 fastify.register(documents, { prefix: '/documents' });
 fastify.register(javascript, { prefix: '/javascript' });
 fastify.register(projects, { prefix: '/projects' });
+
 
 (async () => {
 	try {

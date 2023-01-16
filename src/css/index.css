@@ -112,3 +112,11 @@ a {
 		url('/fonts/FiraCode-Regular.woff') format('woff'),
 		url('/fonts/FiraCode-Regular.woff2') format('woff2');
 }
+
+@media only screen 
+and (min-width : 800px) {
+	.content_text {
+		font-size: 30px;
+		width: 50vw;
+	}
+}

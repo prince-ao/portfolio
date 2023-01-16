@@ -1,4 +1,4 @@
-import fs from 'fs';
+const fs = require('fs');
 
 async function routes(fastify, options) {
 	fastify.get('/', async (request, reply) => {
@@ -42,4 +42,4 @@ async function routes(fastify, options) {
 	});
 }
 
-export default routes;
+module.exports = routes;
