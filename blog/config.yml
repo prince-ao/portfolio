@@ -1,4 +1,4 @@
-baseURL: "princeaddo.com/blog"
+baseURL: "http://princeaddo.com/blog"
 title: Prince Addo's /blog
 paginate: 5
 theme: PaperMod
