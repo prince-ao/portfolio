@@ -1,4 +1,4 @@
-baseURL: "http://127.0.0.1:1313/blog"
+baseURL: "http://127.0.0.1"
 title: Prince Addo's /blog
 paginate: 5
 theme: PaperMod
