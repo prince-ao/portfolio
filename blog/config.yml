@@ -1,4 +1,4 @@
-baseURL: "princeaddo.com/blog"
+baseURL: "http://princeaddo.com/blog/"
 title: Prince Addo's /blog
 paginate: 5
 theme: PaperMod
@@ -118,7 +118,7 @@ menu:
       weight: 20
     - identifier: example
       name: portfolio
-      url: http://princeaddo.com
+      url: 
       weight: 30
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
