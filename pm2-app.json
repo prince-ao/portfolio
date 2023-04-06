@@ -1,8 +1,8 @@
 {
     "apps": [
       {
-        "name": "hack-a-project-bot",
-        "script": "./src/bot.ts",
+        "name": "web",
+        "script": "pnpm run start",
         "instances": 1
       }
     ]
