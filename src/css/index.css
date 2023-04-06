@@ -104,14 +104,14 @@ a {
 	margin-left: -1em;
 }
 
-/*@font-face {
+@font-face {
 	font-family: 'Fira Code';
 	src: url('/fonts/FiraCode-Regular.ttf');
 	src: url('/fonts/FiraCode-Medium.otf') format('opentype'),
 		url('/fonts/FiraCode-Regular.ttf') format('truetype'),
 		url('/fonts/FiraCode-Regular.woff') format('woff'),
 		url('/fonts/FiraCode-Regular.woff2') format('woff2');
-}*/
+}
 
 @media only screen 
 and (min-width : 800px) {
