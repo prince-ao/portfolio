@@ -1,11 +1,8 @@
 const fastify = require('fastify')({ logger: true });
-const fs = require('fs');
-const css = require('./routes/css-routes.js');
-const images = require('./routes/images-routes.js');
-const fonts = require('./routes/fonts-routes.js');
-const documents = require('./routes/documents-routes.js');
-const javascript = require('./routes/js-routes.js');
-const projects = require('./routes/projects-routes.js');
+const fs = require('node:fs');
+const path = require('node:path')
+const fstatic = require('@fastify/static');
+const { readdirSync } = require('node:fs');
 
 let visitors = 0;
 let uniqueVisits = 0;
@@ -37,15 +34,6 @@ fastify.get('/', async (request, reply) => {
 	}
 });
 
-/*fastify.get('/blog', async (request, reply) => {
-	try {
-		const file = fs.readFileSync('./src/pages/blog.html');
-		reply.type('text/html').send(file);
-	} catch (err) {
-		const error = new Error('Internal Error.');
-		reply.code(501).send(error);
-	}
-});*/
 
 fastify.get('/contact', async (request, reply) => {
 	try {
@@ -57,13 +45,48 @@ fastify.get('/contact', async (request, reply) => {
 	}
 });
 
-fastify.register(css, { prefix: '/css' });
-fastify.register(images, { prefix: '/images' });
-fastify.register(fonts, { prefix: '/fonts' });
-fastify.register(documents, { prefix: '/documents' });
-fastify.register(javascript, { prefix: '/javascript' });
-fastify.register(projects, { prefix: '/projects' });
+fastify.get('/projects', async (request, reply) => {
+	try {
+		const file = fs.readFileSync('./src/pages/projects.html');
+		reply.type('text/html').send(file);
+	} catch (err) {
+		const error = new Error('Internal Error.');
+		reply.code(501).send(error);
+	}
+});
 
+fastify.register(fstatic, {
+	root: path.join(__dirname, 'css'),
+	prefix: "/css",
+	decorateReply: false
+});
+
+fastify.register(fstatic, {
+	root: path.join(__dirname, 'assets', 'images'),
+	prefix: "/images",
+	decorateReply: false
+});
+
+fastify.register(fstatic, {
+	root: path.join(__dirname, 'assets', 'fonts'),
+	prefix: "/fonts",
+	decorateReply: false
+});
+
+fastify.register(fstatic, {
+	root: path.join(__dirname, 'assets', 'documents'),
+	prefix: "/documents",
+	decorateReply: false
+});
+
+for(let page of readdirSync(path.join(__dirname, 'pages', 'projects'))) {
+	if(page === '.' || page === '..') continue;
+	fastify.log.info(page)
+	fastify.get(`/projects/${page.split(".")[0]}`, (req, res) => {
+		const file = fs.readFileSync(path.join(__dirname, 'pages', 'projects', page));
+		return res.type('text/html').send(file);
+	});
+}
 
 (async () => {
 	try {
