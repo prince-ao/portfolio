@@ -56,6 +56,11 @@ fastify.get('/projects', async (request, reply) => {
 });
 
 fastify.register(fstatic, {
+	root: path.join(__dirname, 'assets', 'fonts'),
+	prefix: "/fonts",
+});
+
+fastify.register(fstatic, {
 	root: path.join(__dirname, 'css'),
 	prefix: "/css",
 	decorateReply: false
@@ -64,12 +69,6 @@ fastify.register(fstatic, {
 fastify.register(fstatic, {
 	root: path.join(__dirname, 'assets', 'images'),
 	prefix: "/images",
-	decorateReply: false
-});
-
-fastify.register(fstatic, {
-	root: path.join(__dirname, 'assets', 'fonts'),
-	prefix: "/fonts",
 	decorateReply: false
 });
 
