@@ -4,32 +4,31 @@ const path = require('node:path')
 const fstatic = require('@fastify/static');
 const { readdirSync } = require('node:fs');
 
-let visitors = 0;
-let uniqueVisits = 0;
-const ips = [];
+// let visitors = 0;
+// let uniqueVisits = 0;
+// const ips = [];
 
 fastify.get('/', async (request, reply) => {
 	try {
-		fastify.log.info(`new visitor, total visitors: ${++visitors}`);
-		if (ips.indexOf(request.ip) == -1) {
-			ips.push(request.ip);
-			fastify.log.info(
-				`the visitor was unique! ip: ${request.ip}, total unique visits: ${++uniqueVisits}`
-			);
-		}
+		// fastify.log.info(`new visitor, total visitors: ${++visitors}`);
+		// if (ips.indexOf(request.ip) == -1) {
+		// 	ips.push(request.ip);
+		// 	fastify.log.info(
+		// 		`the visitor was unique! ip: ${request.ip}, total unique visits: ${++uniqueVisits}`
+		// 	);
+		// }
 
-		fs.writeFile('/var/lib/visitors.txt', ips.toString(), 'utf8', (err) => {
-			if (err) fastify.log.info('ip file was not saved');
-		});
+		// fs.writeFile('/var/lib/visitors.txt', ips.toString(), 'utf8', (err) => {
+		// 	if (err) fastify.log.info('ip file was not saved');
+		// });
 
-		fs.writeFile('/var/lib/uniqueVisitors.txt', String(uniqueVisits), 'utf8', (err) => {
-			if (err) fastify.log.info('ip file was not saved');
-		});
+		// fs.writeFile('/var/lib/uniqueVisitors.txt', String(uniqueVisits), 'utf8', (err) => {
+		// 	if (err) fastify.log.info('ip file was not saved');
+		// });
 
 		const file = fs.readFileSync('./src/index.html');
 		reply.type('text/html').send(file);
 	} catch (err) {
-		const error = new Error('Internal Error.');
 		reply.code(501).send(err);
 	}
 });
