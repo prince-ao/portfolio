@@ -1,0 +1,2 @@
+// for running portfolio
+docker run --name portfolio-inst --rm -d --network host portfolio
