@@ -1,0 +1,23 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import MiddleLayout from "./MiddleLayout.astro";
+
+const {frontmatter} =  Astro.props;
+---
+
+<BaseLayout title={frontmatter.title} path={`blog/${frontmatter.title.toLowerCase().split(" ").join("-")}`}>
+    <MiddleLayout>
+        <article class="prose prose-neutral  min-w-full text-textcolor prose-headings:text-textcolor prose-blockquote:text-textcolor prose-strong:text-textcolor prose-code:text-textcolor prose-a:text-linkcolor hover:prose-a:cursor-pointer prose-hr:border-textcolor prose-blockquote:border-l-textcolor">
+            <button class="bg-primarycolor hover:bg-secondarycolor text-white font-bold py-1 px-2 rounded mb-4" onclick="document.location.href = '/blog'">back</button>
+            <h1 class="text-center">{frontmatter.title}</h1>
+            <h3>Created: {new Date(frontmatter.created).toDateString()}</h3>
+            {frontmatter.updated !== frontmatter.created ? 
+            <h3>Updated: {new Date(frontmatter.updated).toDateString()}</h3>
+            : 
+            <></>
+            }
+             <hr class=" border-t-[4px] border-dashed border-textcolor" />
+            <slot />
+        </article>
+    </MiddleLayout>
+</BaseLayout>

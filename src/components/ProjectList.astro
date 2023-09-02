@@ -1,0 +1,38 @@
+---
+import Link from './Link.astro';
+
+interface Props {
+    projects: {
+        name: string;
+        link: string;
+        date: string;
+        tools: string[];
+        description: string;
+    }[]
+}
+
+const {projects} = Astro.props;
+---
+
+<ul class="text-textcolor">
+    {projects.map(({name, link, date, tools, description}) => (
+            <li class="before:content-['🖥️'] mt-5">
+                {link === '#' ? 
+                <button class="hover:underline" onclick="comingSoonAlert()"><b>{name}</b></button>
+                : 
+                <a target="_blank" rel="noopener noreferrer" href={link} class="hover:underline"> <b>{name}</b></a>
+                }
+<span class="float-right">{date}</span>
+                <ul class="ml-8 mt-2">
+                    <li class="before:content-['🔧']"> <span class="text-primarycolor">Tools:</span> {tools.join(", ")}</li>
+                    <li class="before:content-['📃']"> <span class="text-primarycolor">Description:</span> {description}</li>
+                </ul>
+            </li>
+    ))}
+</ul>
+
+<script is:inline>
+    function comingSoonAlert() {
+        alert("coming soon...");
+    }
+</script>

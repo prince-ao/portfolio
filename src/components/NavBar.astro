@@ -1,0 +1,23 @@
+---
+import Toggle from './Toggle.svelte';
+
+interface Props {
+    currentPath: string
+}
+
+const { currentPath } = Astro.props;
+---
+
+<nav class="flex items-center justify-around border-b-2 border-dashed border-dashcolor h-16">
+    <div class="grow-[2] flex justify-center">
+        <h1 class="font-bold w-fit text-center text-lg md:text-3xl text-primarycolor hover:cursor-pointer hover:underline">Prince Addo <a class="text-inherit no-underline" href="/">/{currentPath}</a></h1>
+    </div>
+
+    <div class="flex grow justify-center gap-3">
+        <ul class="list-none flex justify-around">
+            <li><a class="w-fit no-underline font-bold text-fontcolor text-md md:text-xl hover:text-secondarycolor" href="/blog">Blog</a></li>
+        </ul>
+
+        <Toggle client:load />
+    </div>
+</nav>

@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --primary-color: 0 128 0;
+        --secondary-color: red;
+        --font-color: white;
+        --bg-color: rgb(29, 29, 29);
+        --dash-color: 73 73 73;
+        --text-color: 206 206 206;
+        --link-color: 0 89 255;
+        --post-banner-color: 62 62 62;
+    }
+
+    .light-mode {
+        --primary-color: 0 85 0;
+        --font-color: black;
+        --bg-color: rgb(238, 238, 238);
+        --dash-color: 176 176 176;
+        --text-color: 44 44 44;
+        --link-color: 0 4 255;
+        --post-banner-color: 255 255 255;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--primary-color);
+        font-family: "Fira Code", Calibri, Tahoma, sans-serif;
+    }
+}

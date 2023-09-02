@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import BlogPostBanner from "@components/BlogPostBanner.astro";
+import MiddleLayout from "@layouts/MiddleLayout.astro";
+
+interface BlogPostBannerI {
+    title: string;
+    description: string;
+    created: Date;
+    timeToRead: number;
+    words: number;
+}
+
+let where = "All";
+
+const posts: BlogPostBannerI[] = (await Astro.glob("../../posts/*.(md|mdx)")).sort((a , b) => {
+    const aDate = new Date(a.frontmatter.created);
+    const bDate = new Date(b.frontmatter.created);
+
+    return bDate.valueOf() - aDate.valueOf();
+}).map(({frontmatter, rawContent}) => {
+    const wordCount = (rawContent() as string).replaceAll('\n', '').split(' ').length
+
+    return({
+        title: frontmatter.title as string,
+        description: frontmatter.description as string,
+        created:  new Date(frontmatter.created) as Date,
+        words: wordCount as number,
+        timeToRead: Number((wordCount / 300).toFixed(0))
+    });
+})
+---
+
+<BaseLayout title="Prince Addo blog" path="blog">
+    <MiddleLayout>
+        <h1 class="text-3xl w-fit border-b-2 border-dashcolor border-dashed text-textcolor">{where}</h1>
+        {posts.map((blogPostBanner) => (
+            <BlogPostBanner {blogPostBanner}/>
+        ))}
+    </MiddleLayout>
+</BaseLayout>

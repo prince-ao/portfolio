@@ -1,0 +1,29 @@
+---
+interface Props {
+    blogPostBanner: {
+        title: string;
+        description: string;
+        created: Date;
+        timeToRead: number;
+        words: number;
+    }
+}
+
+const {blogPostBanner} = Astro.props;
+
+function processDate(date: string) {
+    let dateArr = date.split(" ")
+    dateArr.shift();
+    const month = dateArr.shift();
+
+    return [month, dateArr.join(", ")].join(" ");
+}
+---
+
+<div class="rounded-lg text-textcolor bg-postbannercolor w-fit p-5 hover:cursor-pointer my-5  min-w-[450px] max-w-[450px]">
+    <a href=`/blog/${blogPostBanner.title.toLowerCase().split(" ").join("-")}` class="flex flex-col gap-3">
+        <h1 class="text-2xl"><b>{blogPostBanner.title}</b></h1>
+        <p class="text-sm">{blogPostBanner.description}</p>
+        <p class="text-sm">{processDate(blogPostBanner.created.toDateString())} | {blogPostBanner.timeToRead} min | {blogPostBanner.words} words</p>
+    </a>
+</div>

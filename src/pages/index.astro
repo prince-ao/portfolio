@@ -1,0 +1,108 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+import SectionParagraph from "@components/SectionParagraph.astro";
+import Link from "@components/Link.astro";
+import ProjectList from "@components/ProjectList.astro";
+import ProfessionalList from "@components/ProfessionalList.astro";
+import MiddleLayout from "@layouts/MiddleLayout.astro";
+
+interface ProjectListProp {
+	name: string;
+	link: string;
+	date: string;
+	tools: string[];
+	description: string;
+}
+
+interface professionalProp {
+	title: string;
+	date: string;
+	location: string;
+	company: string;
+}
+
+const email: string = "princeaddo608@gmail.com"
+const github: string = "prince-ao"
+
+const projects: ProjectListProp[]  = [
+	{
+		name: "Portfolio Builder",
+		link: "#",
+		date: "Aug 2023 - Present",
+		tools: [
+			"AWS", "Astro", "Typescript"
+		],
+		description: "A web application that generates a custom portfolio website for CS students."
+	},
+	{
+		name: "Dipole",
+		link: "https://github.com/prince-ao/dipole",
+		date: "Dec 2022",
+		tools: [
+			"C++", "C", "Vim"
+		],
+		description: "An interpreter for the dipole language with a custom recursive decent parser."
+	},
+	{
+		name: "Consumet",
+		link: "https://github.com/consumet",
+		date: "Jun 2022 - Jun 2023",
+		tools: [
+			"Typescript", "Hugo", "Fastify", "AWS"
+		],
+		description: "An API and web scrapper that serves entertainment content(mainly anime) information and videos(similar to the imdb api, but with the full movies and shows)."
+	},
+	{
+		name: "Samizdat",
+		link: "https://github.com/prince-ao/samizdat",
+		date: "Feb 2022 - Jun 2022",
+		tools: [
+			"Kotlin", "Android Studio", "XML", "Express", "Javascript"
+		],
+		description: "A mobile android application that allows users to download any."
+	},
+	{
+		name: "AnimaLazerV3",
+		link: "https://github.com/prince-ao/AnimeLazerV3",
+		date: "Aug 2021 - Dec 2021",
+		tools: [
+			"React Native", "Javascript", "Express"
+		],
+		description: "A cross platform mobile app for streaming anime content."
+	}
+];
+
+const professional: professionalProp[]  = [
+	{
+		company: "Capital One Financial Corporation",
+		location: "New York, NY",
+		title:  "Software Engineer Intern",
+		date: "Jun 2023 - Aug 2023"
+	},
+	{
+		company: "CUNY College of Staten Island",
+		location: "Staten Island, NY",
+		title: "College Assitant",
+		date: "Jul 2022 - May 2024"
+	}
+]
+---
+
+<BaseLayout title="Prince Addo" path="home">
+	<MiddleLayout>
+		<SectionTitle>About me</SectionTitle>
+		<SectionParagraph>My name is Prince Addo and I am an undergraduate majoring in Computer Science and minoring in Mathematics at <Link href="https://www.csi.cuny.edu/">CUNY College of Staten Island</Link>.</SectionParagraph>
+		<SectionParagraph>In my spare time I like <Link href="https://jie-fang.github.io/blog/basics-of-ricing">ricing</Link> (I use Arch, btw) and working on software projects.</SectionParagraph>
+
+		<SectionTitle>Projects</SectionTitle>
+		<ProjectList {projects} />
+
+		<SectionTitle>Professional history</SectionTitle>
+		<ProfessionalList {professional}/>
+
+		<SectionTitle>Socials</SectionTitle>
+		<p class="text-textcolor mt-5"><b>Email</b>: {email}</p>
+		<p class="text-textcolor mt-5"><b>Github</b>: <Link href="https://github.com/prince-ao">{github}</Likn></p>
+	</MiddleLayout>
+</BaseLayout>

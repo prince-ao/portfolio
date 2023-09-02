@@ -1,0 +1,24 @@
+---
+import Link from './Link.astro';
+
+interface Props {
+    professional: {
+        title: string;
+        date: string;
+        location: string;
+        company: string;
+    }[]
+}
+
+const {professional} = Astro.props;
+---
+
+<ul class="text-textcolor list-disc ml-4">
+    {professional.map(({title, date, location, company}) => (
+        <li class="mt-5">
+            <b>{company}</b> | {location} <span class="float-right">{date}</span><br>
+            {title}
+        </li>
+    ))}
+    <li class="mt-5">I majored in computer science at <Link href="https://www.csi.cuny.edu/">College of Staten Island</Link>. <span class="float-right">2021 - 2024</span></li>
+</ul>
