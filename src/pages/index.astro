@@ -22,7 +22,7 @@ interface professionalProp {
 	company: string;
 }
 
-const email: string = "princeaddo608@gmail.com"
+const email: string = "prince.addo3.141@gmail.com"
 const github: string = "prince-ao"
 
 const projects: ProjectListProp[]  = [
@@ -89,7 +89,7 @@ const professional: professionalProp[]  = [
 ]
 ---
 
-<BaseLayout title="Prince Addo" path="home">
+<BaseLayout title="Prince Addo" path="">
 	<MiddleLayout>
 		<SectionTitle>About me</SectionTitle>
 		<SectionParagraph>My name is Prince Addo and I am an undergraduate majoring in Computer Science and minoring in Mathematics at <Link href="https://www.csi.cuny.edu/">CUNY College of Staten Island</Link>.</SectionParagraph>
@@ -99,10 +99,15 @@ const professional: professionalProp[]  = [
 		<ProjectList {projects} />
 
 		<SectionTitle>Professional history</SectionTitle>
-		<ProfessionalList {professional}/>
+		<ProfessionalList {professional} />
 
 		<SectionTitle>Socials</SectionTitle>
 		<p class="text-textcolor mt-5"><b>Email</b>: {email}</p>
 		<p class="text-textcolor mt-5"><b>Github</b>: <Link href="https://github.com/prince-ao">{github}</Likn></p>
+		<div class="border-t-2 border-dashed border-gray-400 flex gap-4 pt-2 mt-8 justify-center">
+			<img src="/buttons/get.gif">
+			<img src="/buttons/263gggk.gif">
+			<img src="/buttons/quake_ctf_now30.gif">
+		</div>
 	</MiddleLayout>
 </BaseLayout>
