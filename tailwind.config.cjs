@@ -14,7 +14,11 @@ module.exports = {
             postbannercolor: "rgb(var(--post-banner-color))",
             ...colors,
         },
-        extend: {},
+        extend: {
+            minHeight: {
+                page: "calc(100vh - 64px - 64px)",
+            },
+        },
     },
     plugins: [require("@tailwindcss/typography")],
 };
