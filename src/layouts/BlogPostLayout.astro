@@ -3,9 +3,10 @@ import BaseLayout from "./BaseLayout.astro";
 import MiddleLayout from "./MiddleLayout.astro";
 
 const {frontmatter} =  Astro.props;
+
 ---
 
-<BaseLayout title={frontmatter.title} path={`/blog/${frontmatter.title.toLowerCase().split(" ").join("-")}`}>
+<BaseLayout title={frontmatter.nav_title} path={`/blog/${frontmatter.nav_title}`}>
     <MiddleLayout padding={false}>
         <article class="prose prose-neutral  min-w-full text-textcolor prose-headings:text-textcolor prose-blockquote:text-textcolor prose-strong:text-textcolor prose-code:text-textcolor prose-a:text-linkcolor hover:prose-a:cursor-pointer prose-hr:border-textcolor prose-blockquote:border-l-textcolor min-h-page pt-12 prose-hr:mb-10 prose-hr:mt-4 prose-blockquote:first:before:content-none prose-code:before:content-none prose-code:after:content-none prose-p:text-sm md:prose-p:text-md prose-h2:text-xl md:prose-h2:text-2xl prose-h3:text-lg md:prose-h3:text-xl">
             <h1 class="text-center text-2xl md:text-4xl !mb-2">{frontmatter.title}</h1>

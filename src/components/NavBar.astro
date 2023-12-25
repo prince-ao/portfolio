@@ -15,7 +15,7 @@ const { currentPath } = Astro.props as Props;
         <div class="flex justify-between">
             <div class="flex justify-center">
                 <a href=`${currentPath.split("/").length <= 2 ? "/" : "/blog"}`>
-                    <h1 class="font-bold w-fit text-center text-xl md:text-3xl text-primarycolor hover:cursor-pointer hover:underline">Prince Addo <span class="hidden xl:inline-block">{currentPath}</span></h1>
+                    <h1 class="font-bold w-fit text-center text-xl md:text-3xl text-primarycolor hover:cursor-pointer hover:text-secondarycolor">Prince Addo <div class="hidden xl:inline-block">{currentPath}</div></h1>
                 </a>
             </div>
 
