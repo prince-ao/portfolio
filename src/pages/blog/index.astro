@@ -14,40 +14,46 @@ interface BlogPostBannerI {
 let where = "All Posts";
 let previous_post: undefined | BlogPostBannerI = undefined;
 
-const posts: BlogPostBannerI[] = (await Astro.glob("../../posts/*.(md|mdx)")).sort((a , b) => {
-    const aDate = new Date(a.frontmatter.created);
-    const bDate = new Date(b.frontmatter.created);
+let posts: BlogPostBannerI[] = []
 
-    return bDate.valueOf() - aDate.valueOf();
-}).map(({frontmatter, rawContent}) => {
-    const wordCount = (rawContent() as string).replaceAll('\n', '').split(' ').length
+try {
+    posts = (await Astro.glob("../../posts/*.(md|mdx)")).sort((a , b) => {
+        const aDate = new Date(a.frontmatter.created);
+        const bDate = new Date(b.frontmatter.created);
 
-    return({
-        title: frontmatter.title as string,
-        description: frontmatter.description as string,
-        created:  new Date(frontmatter.created) as Date,
-        words: wordCount as number,
-        timeToRead: Number((wordCount / 300).toFixed(0))
-    });
-})
+        return bDate.valueOf() - aDate.valueOf();
+    }).map(({frontmatter, rawContent}) => {
+        const wordCount = (rawContent() as string).replaceAll('\n', '').split(' ').length
+
+        return({
+            title: frontmatter.title as string,
+            description: frontmatter.description as string,
+            created:  new Date(frontmatter.created) as Date,
+            words: wordCount as number,
+            timeToRead: Number((wordCount / 300).toFixed(0))
+        });
+    })
+}catch(e) {
+    posts = []
+}
 ---
 
-<BaseLayout title="Prince Addo blog" path="blog">
+<BaseLayout title="Prince Addo blog" path="/blog">
     <MiddleLayout padding={false}>
         <div class="min-h-page pt-8">
-        <h1 class="text-3xl w-fit border-b-2 border-dashcolor border-dashed text-textcolor">{where}</h1>
-        {posts.map((blogPostBanner, i) => {
-            let post = false;
-            if(i == 0 || (previous_post !== undefined && previous_post.created.getFullYear() !== blogPostBanner.created.getFullYear())) post = true;
-            previous_post = blogPostBanner;
-            return(
-                <h1>
-                    {post && <h1 class="font-bold text-2xl mb-3 mt-7">{blogPostBanner.created.getFullYear()}</h1>}
-                    <BlogPostBanner {blogPostBanner}/>
-                </h1>
-            )
-        })
-        }
+            <h1 class="text-xl md:text-3xl w-fit border-b-2 border-dashcolor border-dashed text-textcolor">{where}</h1>
+            {posts.map((blogPostBanner, i) => {
+                let post = false;
+                if(i == 0 || (previous_post !== undefined && previous_post.created.getFullYear() !== blogPostBanner.created.getFullYear())) post = true;
+                previous_post = blogPostBanner;
+                return(
+                    <h1>
+                        {post && <h1 class="font-bold text-lg md:text-2xl mb-3 mt-7">{blogPostBanner.created.getFullYear()}</h1>}
+                        <BlogPostBanner {blogPostBanner}/>
+                    </h1>
+                )
+            })
+            }
         </div>
     </MiddleLayout>
 </BaseLayout>

@@ -6,7 +6,7 @@ interface Props {
 const { padding = true } = Astro.props;
 ---
 <div class="flex justify-center w-full">
-    <div class=`w-3/4 xl:w-2/3 2xl:w-1/2 ${padding ? 'pt-20' : 'pt-0'}`>
+    <div class=`w-3/4 xl:w-2/3 2xl:w-1/2 ${padding ? 'pt-1 md:pt-20' : 'pt-0'}`>
         <slot />
     </div>
 </div>

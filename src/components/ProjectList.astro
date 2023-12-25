@@ -15,17 +15,17 @@ const {projects} = Astro.props;
 ---
 
 <ul class="text-textcolor">
-    {projects.map(({name, link, date, tools, description}) => (
+    {projects.map(({name, link, date, tools, description}: {name: string, link: string, date: string, tools: string[], description: string}) => (
             <li class="before:content-['🖥️'] mt-5">
                 {link === '#' ? 
-                <button class="hover:underline" onclick="comingSoonAlert()"><b>{name}</b></button>
+                <button class="hover:underline text-sm md:text-md" onclick="comingSoonAlert()"><b>{name}</b></button>
                 : 
-                <a target="_blank" rel="noopener noreferrer" href={link} class="hover:underline"> <b>{name}</b></a>
+                <a target="_blank" rel="noopener noreferrer" href={link} class="hover:underline text-sm md:text-md"> <b>{name}</b></a>
                 }
-<span class="float-right">{date}</span>
+<span class="float-right text-md invisible sm:visible">{date}</span>
                 <ul class="ml-8 mt-2">
-                    <li class="before:content-['🔧']"> <span class="text-primarycolor">Tools:</span> {tools.join(", ")}</li>
-                    <li class="before:content-['📃']"> <span class="text-primarycolor">Description:</span> {description}</li>
+                    <li class="before:content-['🔧'] text-sm md:text-md"> <span class="text-primarycolor">Tools:</span> {tools.join(", ")}</li>
+                    <li class="before:content-['📃'] text-sm md:text-md"> <span class="text-primarycolor">Description:</span> {description}</li>
                 </ul>
             </li>
     ))}

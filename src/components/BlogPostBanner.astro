@@ -20,8 +20,8 @@ function processDate(date: string) {
 }
 ---
 
-<div class="text-textcolor w-fit my-2 min-w-[450px] max-w-[450px] flex">
-    <p class="text-sm">{processDate(blogPostBanner.created.toDateString())}</p>
-    <span class=" mx-2">-</span>
-    <a href=`/blog/${blogPostBanner.title.toLowerCase().split(" ").join("-")}` class="flex flex-col gap-3 text-linkcolor hover:text-secondarycolor"> {blogPostBanner.title} </a>
+<div class="text-textcolor w-fit my-2 flex">
+    <p class="text-xs md:text-sm">{processDate(blogPostBanner.created.toDateString())}</p>
+    <span class="text-xs md:text-sm mx-2">-</span>
+    <a href=`/blog/${blogPostBanner.title.toLowerCase().split(" ").join("-")}` class="flex flex-col gap-3 text-linkcolor hover:text-secondarycolor text-xs md:text-sm"> {blogPostBanner.title} </a>
 </div>

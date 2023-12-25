@@ -89,7 +89,7 @@ const professional: professionalProp[]  = [
 ]
 ---
 
-<BaseLayout title="Prince Addo" path="">
+<BaseLayout title="Prince Addo" path="/">
 	<MiddleLayout>
 		<SectionTitle>About me</SectionTitle>
 		<SectionParagraph>My name is Prince Addo and I am an undergraduate majoring in Computer Science and minoring in Mathematics at <Link href="https://www.csi.cuny.edu/">CUNY College of Staten Island</Link>.</SectionParagraph>
@@ -102,12 +102,12 @@ const professional: professionalProp[]  = [
 		<ProfessionalList {professional} />
 
 		<SectionTitle>Socials</SectionTitle>
-		<p class="text-textcolor mt-5"><b>Email</b>: {email}</p>
-		<p class="text-textcolor mt-5"><b>Github</b>: <Link href="https://github.com/prince-ao">{github}</Likn></p>
-		<div class="flex gap-4 pt-6 mt-10 justify-center">
-			<img src="/buttons/get.gif">
-			<img src="/buttons/263gggk.gif">
-			<img src="/buttons/quake_ctf_now30.gif">
+		<SectionParagraph><b>Email</b>: {email}</p>
+		<SectionParagraph><b>Github</b>: <Link href="https://github.com/prince-ao">{github}</Likn></p>
+		<div class="flex gap-2 md:gap-4 pt-6 mt-6 md:mt-10 justify-center">
+			<img class="w-[58px] md:w-[88px] h-[20px] md:h-[31px]" src="/buttons/get.gif">
+			<img class="w-[58px] md:w-[88px] h-[20px] md:h-[31px]" src="/buttons/263gggk.gif">
+			<img class="w-[58px] md:w-[88px] h-[20px] md:h-[31px]" src="/buttons/quake_ctf_now30.gif">
 		</div>
 		<div class="mb-16"></div>
 	</MiddleLayout>
