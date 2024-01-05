@@ -1,13 +1,13 @@
 ---
 title: "Infinite Canvas Journey: Part 1"
-nav_title: "infinite-canvas-journey-1"
+nav_title: "infinite-1"
 layout: "@layouts/BlogPostLayout.astro"
 author: "Prince Addo"
 created: "2024-01-05T18:02:58+00:00"
 tags: ["infinite-canvas"]
 ---
 
-# What is infinite canvas?
+## What is infinite canvas?
 I found the concept(or maybe principles?) of infinite canvas while reading [a blog post](https://wattenberger.com/thoughts/evolving-the-infinite-canvas)
 which linked to the [infinite canvas description page](https://infinitecanvas.tools/) It piqued my interest
 mainly because it seemed like it could be applied to a project that I was starting.
@@ -32,7 +32,7 @@ shows the next classes, and process everything in the backend, but it would be
 a lot more interesting and better for the user if the principles of infinite 
 canvas were used.
 
-# Moving a node
+## Moving a node
 Part of fulfilling the expansiveness principle is making a node(a unit that could be manipulated)
 movable. There are two ways to accomplish this using TypeScript(or JavaScript)
 using the `left` and `top` style property or using the `transform` property with
